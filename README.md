@@ -1,4 +1,4 @@
-Source code for the book: *Foundations of Applied Statistics* by John D. Storey
+Source code for the book: *YARP, Yet Another R Primer* by John D. Storey
 
-See https://jdstorey.github.io/fas/
+See https://jdstorey.github.io/yarp/
 
