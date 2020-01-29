@@ -1,0 +1,21 @@
+new_session: yes
+
+output_dir: "docs"
+
+book_filename: "yarp"
+
+language:
+  ui:
+    chapter_name: ""
+
+rmd_files: [
+  "index.Rmd",
+  "preface.Rmd",
+  "r.Rmd",
+  "data_wrangling.Rmd",
+  "eda.Rmd",
+  "references.Rmd",
+  "session_info.Rmd"
+]
+
+# before_chapter_script: "_common.R"

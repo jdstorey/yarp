@@ -1,0 +1,21 @@
+---
+knit: "bookdown::render_book"
+title: "YARP, Yet Another R Primer"
+subtitle: "A short introduction to R, R Markdown, and elements of the tidyverse"
+author: "John D. Storey"
+description: "YARP, Yet Another R Primer"
+date: "Created 2017-02-01; Last modified `r Sys.Date()`"
+url: 'https\://jdstorey.github.io/yarp/'
+github-repo: jdstorey/yarp
+twitter-handle: johnstorey
+cover-image: images/tenor-2.gif
+site: bookdown::bookdown_site
+documentclass: book
+---
+
+#  {-}
+
+```{r fig.align='center', out.width='75%', echo=FALSE}
+knitr::include_graphics('images/tenor-2.gif')
+```
+

@@ -1,0 +1,26 @@
+# Preface {-}
+
+Hello, friend. This is yet another primer to get you started in R. I primarily created this to serve as a resource for students taking my courses at Princeton University. However, I've been told by others that they found it useful as both a primer and a quick reference. I've tried to make this primer as efficient as possible and provide the reader with what I consider to be the essentials. My experience is that the faster you can start using a statistical programming language such as R, the more likely you will appreciate its usefulness and continue to use it and learn. There isn't a lot of discussion in this primer; it's mostly examples in R.
+
+The content of this document started with an undergraduate course I developed, called [Introduction to Data Science](http://sml201.github.io). In that course, I made slides using the amazing R package [`revealjs`](https://cran.r-project.org/web/packages/revealjs/index.html).  I then developed Foundations of Applied Statistics and Data Science (with Applications in Biology), creating more advanced slides also using `revealjs`; these slides can be found at https://jdstorey.org/asdscourse2017/lectures/, and the source code at https://github.com/jdstorey/asdslectures. Although I no longer use these slides to teach my courses, I was nevertheless able to easily use the R Markdown as a starting point for this primer, using the [`bookdown`](https://cran.rstudio.com/web/packages/bookdown/index.html) package.
+
+This primer is organized into three main parts:
+
+<ol type="I">
+  <li> R basics and programming, including reproducible data analysis and R Markdown
+  <li> Data wrangling, including `dplyr`
+  <li> Explortatory data analysis, including base graphics and `ggplot2`
+</ol>
+
+#### Source Files {-}
+
+The source files are maintained on GitHub: https://github.com/jdstorey/yarp
+
+Feel free to visit this repository to help me make the book better.
+
+#### About The Author {-}
+
+John D. Storey received his PhD from Stanford University in statistics with a PhD minor in genetics. He then held faculty positions at the University of California, Berkeley and the University of Washington. Since 2008, he has a been a professor in the Lewis-Sigler Institute for Integrative Genomics at Princeton University. Storey's research has been concerned with developing and applying statistical methods in genetics and genomics. He has made pioneering contributions to the development and application of methods for significance testing and inference on high-dimensional data.
+
+In 2014, Storey was appointed the founding Director of the Center for Statistics and Machine Learning at Princeton University and he was also named the William R. Harman '63 and Mary-Love Harman Professor in Genomics. He is an elected fellow of the American Association for the Advancement of Science as well as the Institute of Mathematical Statistics. He is the winner of the 2015 COPSS Presidents' Award.  He is also the winner of the 2015 Mortimer Spiegelman Award given by the American Public Health Association for outstanding contributions to public health statistics.
+

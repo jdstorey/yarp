@@ -1,0 +1,16 @@
+bookdown::gitbook:
+#  includes:
+#    in_header: [ga_script.html]
+  css: yarp.css
+  config:
+    toc:
+      collapse: section
+      before: |
+        <li><strong><a href="./index.html">YARP, Yet Another R Primer</a></strong></li>
+    edit:
+      link: https://github.com/jdstorey/yarp/edit/master/%s
+      text: "Edit"
+    sharing: no
+
+#bookdown::pdf_book:
+#  latex_engine: "xelatex"

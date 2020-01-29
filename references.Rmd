@@ -1,0 +1,17 @@
+# (APPENDIX) Appendix {-}
+
+# References {-}
+
+```{r, eval=FALSE, echo=FALSE}
+if (knitr:::is_html_output()) '# References {-}'
+```
+
+The following books have served as references while writing *YARP*:
+
+- [*Advanced R*](http://adv-r.had.co.nz), by Hadley Wickham
+- [*Elements of Data Analytic Style*](https://leanpub.com/datastyle), by Jeff Leek
+- [*R for Data Science*](https://r4ds.had.co.nz), by Hadley Wickham and Garrett Grolemund
+- [*R Programming for Data Science*](https://leanpub.com/rprogramming), by Roger Peng
+- [R help files](https://www.r-project.org/help.html) provided by the developers of R and contributed packages
+
+Once you have finished reading *YARP*, I encourage you to read these more comprehensive references.

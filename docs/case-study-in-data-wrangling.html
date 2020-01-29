@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>10 Case Study in Data Wrangling | YARP, Yet Another R Primer</title>
+  <meta name="description" content="10 Case Study in Data Wrangling | YARP, Yet Another R Primer" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="10 Case Study in Data Wrangling | YARP, Yet Another R Primer" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://jdstorey.github.io/yarp/" />
+  <meta property="og:image" content="https://jdstorey.github.io/yarp/images/tenor-2.gif" />
+  <meta property="og:description" content="10 Case Study in Data Wrangling | YARP, Yet Another R Primer" />
+  <meta name="github-repo" content="jdstorey/yarp" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="10 Case Study in Data Wrangling | YARP, Yet Another R Primer" />
+  <meta name="twitter:site" content="@johnstorey" />
+  <meta name="twitter:description" content="10 Case Study in Data Wrangling | YARP, Yet Another R Primer" />
+  <meta name="twitter:image" content="https://jdstorey.github.io/yarp/images/tenor-2.gif" />
+
+<meta name="author" content="John D. Storey" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="relational-data.html">
+<link rel="next" href="further-reading.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="yarp.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="./index.html">YARP, Yet Another R Primer</a></strong></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>I R</b></span></li>
+<li class="chapter" data-level="1" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>1</b> R Basics</a><ul>
+<li class="chapter" data-level="1.1" data-path="r-basics.html"><a href="r-basics.html#what-is-r"><i class="fa fa-check"></i><b>1.1</b> What is R?</a></li>
+<li class="chapter" data-level="1.2" data-path="r-basics.html"><a href="r-basics.html#pros-and-cons-of-r"><i class="fa fa-check"></i><b>1.2</b> Pros and Cons of R</a></li>
+<li class="chapter" data-level="1.3" data-path="r-basics.html"><a href="r-basics.html#rstudio"><i class="fa fa-check"></i><b>1.3</b> RStudio</a></li>
+<li class="chapter" data-level="1.4" data-path="r-basics.html"><a href="r-basics.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.4</b> Getting Started in R</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="r-basics.html"><a href="r-basics.html#calculator"><i class="fa fa-check"></i><b>1.4.1</b> Calculator</a></li>
+<li class="chapter" data-level="1.4.2" data-path="r-basics.html"><a href="r-basics.html#atomic-classes"><i class="fa fa-check"></i><b>1.4.2</b> Atomic Classes</a></li>
+<li class="chapter" data-level="1.4.3" data-path="r-basics.html"><a href="r-basics.html#assigning-values-to-variables"><i class="fa fa-check"></i><b>1.4.3</b> Assigning Values to Variables</a></li>
+<li class="chapter" data-level="1.4.4" data-path="r-basics.html"><a href="r-basics.html#more-ways-to-assign-values"><i class="fa fa-check"></i><b>1.4.4</b> More Ways to Assign Values</a></li>
+<li class="chapter" data-level="1.4.5" data-path="r-basics.html"><a href="r-basics.html#evaluation"><i class="fa fa-check"></i><b>1.4.5</b> Evaluation</a></li>
+<li class="chapter" data-level="1.4.6" data-path="r-basics.html"><a href="r-basics.html#functions"><i class="fa fa-check"></i><b>1.4.6</b> Functions</a></li>
+<li class="chapter" data-level="1.4.7" data-path="r-basics.html"><a href="r-basics.html#accessing-help-in-r"><i class="fa fa-check"></i><b>1.4.7</b> Accessing Help in R</a></li>
+<li class="chapter" data-level="1.4.8" data-path="r-basics.html"><a href="r-basics.html#variable-names"><i class="fa fa-check"></i><b>1.4.8</b> Variable Names</a></li>
+<li class="chapter" data-level="1.4.9" data-path="r-basics.html"><a href="r-basics.html#vectors"><i class="fa fa-check"></i><b>1.4.9</b> Vectors</a></li>
+<li class="chapter" data-level="1.4.10" data-path="r-basics.html"><a href="r-basics.html#vectors-1"><i class="fa fa-check"></i><b>1.4.10</b> Vectors</a></li>
+<li class="chapter" data-level="1.4.11" data-path="r-basics.html"><a href="r-basics.html#matrices"><i class="fa fa-check"></i><b>1.4.11</b> Matrices</a></li>
+<li class="chapter" data-level="1.4.12" data-path="r-basics.html"><a href="r-basics.html#factors"><i class="fa fa-check"></i><b>1.4.12</b> Factors</a></li>
+<li class="chapter" data-level="1.4.13" data-path="r-basics.html"><a href="r-basics.html#lists"><i class="fa fa-check"></i><b>1.4.13</b> Lists</a></li>
+<li class="chapter" data-level="1.4.14" data-path="r-basics.html"><a href="r-basics.html#lists-with-names"><i class="fa fa-check"></i><b>1.4.14</b> Lists with Names</a></li>
+<li class="chapter" data-level="1.4.15" data-path="r-basics.html"><a href="r-basics.html#missing-values"><i class="fa fa-check"></i><b>1.4.15</b> Missing Values</a></li>
+<li class="chapter" data-level="1.4.16" data-path="r-basics.html"><a href="r-basics.html#null"><i class="fa fa-check"></i><b>1.4.16</b> <code>NULL</code></a></li>
+<li class="chapter" data-level="1.4.17" data-path="r-basics.html"><a href="r-basics.html#coercion"><i class="fa fa-check"></i><b>1.4.17</b> Coercion</a></li>
+<li class="chapter" data-level="1.4.18" data-path="r-basics.html"><a href="r-basics.html#data-frames"><i class="fa fa-check"></i><b>1.4.18</b> Data Frames</a></li>
+<li class="chapter" data-level="1.4.19" data-path="r-basics.html"><a href="r-basics.html#data-frames-1"><i class="fa fa-check"></i><b>1.4.19</b> Data Frames</a></li>
+<li class="chapter" data-level="1.4.20" data-path="r-basics.html"><a href="r-basics.html#data-frames-2"><i class="fa fa-check"></i><b>1.4.20</b> Data Frames</a></li>
+<li class="chapter" data-level="1.4.21" data-path="r-basics.html"><a href="r-basics.html#attributes"><i class="fa fa-check"></i><b>1.4.21</b> Attributes</a></li>
+<li class="chapter" data-level="1.4.22" data-path="r-basics.html"><a href="r-basics.html#names"><i class="fa fa-check"></i><b>1.4.22</b> Names</a></li>
+<li class="chapter" data-level="1.4.23" data-path="r-basics.html"><a href="r-basics.html#accessing-names"><i class="fa fa-check"></i><b>1.4.23</b> Accessing Names</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html"><i class="fa fa-check"></i><b>2</b> Reproducible Data Analysis</a><ul>
+<li class="chapter" data-level="2.1" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#definition-and-motivation"><i class="fa fa-check"></i><b>2.1</b> Definition and Motivation</a></li>
+<li class="chapter" data-level="2.2" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#reproducible-vs.replicable"><i class="fa fa-check"></i><b>2.2</b> Reproducible vs. Replicable</a></li>
+<li class="chapter" data-level="2.3" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#steps-to-a-reproducible-analysis"><i class="fa fa-check"></i><b>2.3</b> Steps to a Reproducible Analysis</a></li>
+<li class="chapter" data-level="2.4" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#organizing-your-data-analysis"><i class="fa fa-check"></i><b>2.4</b> Organizing Your Data Analysis</a></li>
+<li class="chapter" data-level="2.5" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#common-mistakes"><i class="fa fa-check"></i><b>2.5</b> Common Mistakes</a></li>
+<li class="chapter" data-level="2.6" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#r-markdown"><i class="fa fa-check"></i><b>2.6</b> R Markdown</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#r-markdown-knitr"><i class="fa fa-check"></i><b>2.6.1</b> R + Markdown + knitr</a></li>
+<li class="chapter" data-level="2.6.2" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#r-markdown-files"><i class="fa fa-check"></i><b>2.6.2</b> R Markdown Files</a></li>
+<li class="chapter" data-level="2.6.3" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#markdown"><i class="fa fa-check"></i><b>2.6.3</b> Markdown</a></li>
+<li class="chapter" data-level="2.6.4" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#latex"><i class="fa fa-check"></i><b>2.6.4</b> LaTeX</a></li>
+<li class="chapter" data-level="2.6.5" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#knitr"><i class="fa fa-check"></i><b>2.6.5</b> knitr</a></li>
+<li class="chapter" data-level="2.6.6" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#knitr-chunks"><i class="fa fa-check"></i><b>2.6.6</b> knitr Chunks</a></li>
+<li class="chapter" data-level="2.6.7" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#chunk-option-echo"><i class="fa fa-check"></i><b>2.6.7</b> Chunk Option: <code>echo</code></a></li>
+<li class="chapter" data-level="2.6.8" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#chunk-option-results"><i class="fa fa-check"></i><b>2.6.8</b> Chunk Option: <code>results</code></a></li>
+<li class="chapter" data-level="2.6.9" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#chunk-option-include"><i class="fa fa-check"></i><b>2.6.9</b> Chunk Option: <code>include</code></a></li>
+<li class="chapter" data-level="2.6.10" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#chunk-option-eval"><i class="fa fa-check"></i><b>2.6.10</b> Chunk Option: <code>eval</code></a></li>
+<li class="chapter" data-level="2.6.11" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#chunk-names"><i class="fa fa-check"></i><b>2.6.11</b> Chunk Names</a></li>
+<li class="chapter" data-level="2.6.12" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#knitr-option-cache"><i class="fa fa-check"></i><b>2.6.12</b> knitr Option: <code>cache</code></a></li>
+<li class="chapter" data-level="2.6.13" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#knitr-options-figures"><i class="fa fa-check"></i><b>2.6.13</b> knitr Options: figures</a></li>
+<li class="chapter" data-level="2.6.14" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#changing-default-chunk-settings"><i class="fa fa-check"></i><b>2.6.14</b> Changing Default Chunk Settings</a></li>
+<li class="chapter" data-level="2.6.15" data-path="reproducible-data-analysis.html"><a href="reproducible-data-analysis.html#documentation-and-examples"><i class="fa fa-check"></i><b>2.6.15</b> Documentation and Examples</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>3</b> R Programming</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-programming.html"><a href="r-programming.html#control-structures"><i class="fa fa-check"></i><b>3.1</b> Control Structures</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="r-programming.html"><a href="r-programming.html#rationale"><i class="fa fa-check"></i><b>3.1.1</b> Rationale</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-programming.html"><a href="r-programming.html#common-control-structures"><i class="fa fa-check"></i><b>3.1.2</b> Common Control Structures</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-programming.html"><a href="r-programming.html#some-boolean-logic"><i class="fa fa-check"></i><b>3.1.3</b> Some Boolean Logic</a></li>
+<li class="chapter" data-level="3.1.4" data-path="r-programming.html"><a href="r-programming.html#if"><i class="fa fa-check"></i><b>3.1.4</b> <code>if</code></a></li>
+<li class="chapter" data-level="3.1.5" data-path="r-programming.html"><a href="r-programming.html#if-else"><i class="fa fa-check"></i><b>3.1.5</b> <code>if</code>-<code>else</code></a></li>
+<li class="chapter" data-level="3.1.6" data-path="r-programming.html"><a href="r-programming.html#for-loops"><i class="fa fa-check"></i><b>3.1.6</b> <code>for</code> Loops</a></li>
+<li class="chapter" data-level="3.1.7" data-path="r-programming.html"><a href="r-programming.html#nested-for-loops"><i class="fa fa-check"></i><b>3.1.7</b> Nested <code>for</code> Loops</a></li>
+<li class="chapter" data-level="3.1.8" data-path="r-programming.html"><a href="r-programming.html#while"><i class="fa fa-check"></i><b>3.1.8</b> <code>while</code></a></li>
+<li class="chapter" data-level="3.1.9" data-path="r-programming.html"><a href="r-programming.html#repeat"><i class="fa fa-check"></i><b>3.1.9</b> <code>repeat</code></a></li>
+<li class="chapter" data-level="3.1.10" data-path="r-programming.html"><a href="r-programming.html#break-and-next"><i class="fa fa-check"></i><b>3.1.10</b> <code>break</code> and <code>next</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-programming.html"><a href="r-programming.html#vectorized-operations"><i class="fa fa-check"></i><b>3.2</b> Vectorized Operations</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="r-programming.html"><a href="r-programming.html#calculations-on-vectors"><i class="fa fa-check"></i><b>3.2.1</b> Calculations on Vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-programming.html"><a href="r-programming.html#a-caveat"><i class="fa fa-check"></i><b>3.2.2</b> A Caveat</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-programming.html"><a href="r-programming.html#vectorized-matrix-operations"><i class="fa fa-check"></i><b>3.2.3</b> Vectorized Matrix Operations</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-programming.html"><a href="r-programming.html#mixing-vectors-and-matrices"><i class="fa fa-check"></i><b>3.2.4</b> Mixing Vectors and Matrices</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-programming.html"><a href="r-programming.html#mixing-vectors-and-matrices-1"><i class="fa fa-check"></i><b>3.2.5</b> Mixing Vectors and Matrices</a></li>
+<li class="chapter" data-level="3.2.6" data-path="r-programming.html"><a href="r-programming.html#vectorized-boolean-logic"><i class="fa fa-check"></i><b>3.2.6</b> Vectorized Boolean Logic</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-programming.html"><a href="r-programming.html#subsetting-r-objects"><i class="fa fa-check"></i><b>3.3</b> Subsetting R Objects</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="r-programming.html"><a href="r-programming.html#subsetting-vectors"><i class="fa fa-check"></i><b>3.3.1</b> Subsetting Vectors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-programming.html"><a href="r-programming.html#subsetting-vectors-1"><i class="fa fa-check"></i><b>3.3.2</b> Subsetting Vectors</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-programming.html"><a href="r-programming.html#subsettng-matrices"><i class="fa fa-check"></i><b>3.3.3</b> Subsettng Matrices</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-programming.html"><a href="r-programming.html#subsettng-matrices-1"><i class="fa fa-check"></i><b>3.3.4</b> Subsettng Matrices</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-programming.html"><a href="r-programming.html#subsettng-matrices-2"><i class="fa fa-check"></i><b>3.3.5</b> Subsettng Matrices</a></li>
+<li class="chapter" data-level="3.3.6" data-path="r-programming.html"><a href="r-programming.html#subsetting-lists"><i class="fa fa-check"></i><b>3.3.6</b> Subsetting Lists</a></li>
+<li class="chapter" data-level="3.3.7" data-path="r-programming.html"><a href="r-programming.html#subsetting-data-frames"><i class="fa fa-check"></i><b>3.3.7</b> Subsetting Data Frames</a></li>
+<li class="chapter" data-level="3.3.8" data-path="r-programming.html"><a href="r-programming.html#subsetting-data-frames-1"><i class="fa fa-check"></i><b>3.3.8</b> Subsetting Data Frames</a></li>
+<li class="chapter" data-level="3.3.9" data-path="r-programming.html"><a href="r-programming.html#note-on-data-frames"><i class="fa fa-check"></i><b>3.3.9</b> Note on Data Frames</a></li>
+<li class="chapter" data-level="3.3.10" data-path="r-programming.html"><a href="r-programming.html#missing-values-1"><i class="fa fa-check"></i><b>3.3.10</b> Missing Values</a></li>
+<li class="chapter" data-level="3.3.11" data-path="r-programming.html"><a href="r-programming.html#subsetting-by-matching"><i class="fa fa-check"></i><b>3.3.11</b> Subsetting by Matching</a></li>
+<li class="chapter" data-level="3.3.12" data-path="r-programming.html"><a href="r-programming.html#advanced-subsetting"><i class="fa fa-check"></i><b>3.3.12</b> Advanced Subsetting</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-programming.html"><a href="r-programming.html#functions-1"><i class="fa fa-check"></i><b>3.4</b> Functions</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="r-programming.html"><a href="r-programming.html#rationale-1"><i class="fa fa-check"></i><b>3.4.1</b> Rationale</a></li>
+<li class="chapter" data-level="3.4.2" data-path="r-programming.html"><a href="r-programming.html#defining-a-new-function"><i class="fa fa-check"></i><b>3.4.2</b> Defining a New Function</a></li>
+<li class="chapter" data-level="3.4.3" data-path="r-programming.html"><a href="r-programming.html#example-1"><i class="fa fa-check"></i><b>3.4.3</b> Example 1</a></li>
+<li class="chapter" data-level="3.4.4" data-path="r-programming.html"><a href="r-programming.html#example-2"><i class="fa fa-check"></i><b>3.4.4</b> Example 2</a></li>
+<li class="chapter" data-level="3.4.5" data-path="r-programming.html"><a href="r-programming.html#example-3"><i class="fa fa-check"></i><b>3.4.5</b> Example 3</a></li>
+<li class="chapter" data-level="3.4.6" data-path="r-programming.html"><a href="r-programming.html#default-function-argument-values"><i class="fa fa-check"></i><b>3.4.6</b> Default Function Argument Values</a></li>
+<li class="chapter" data-level="3.4.7" data-path="r-programming.html"><a href="r-programming.html#the-ellipsis-argument"><i class="fa fa-check"></i><b>3.4.7</b> The Ellipsis Argument</a></li>
+<li class="chapter" data-level="3.4.8" data-path="r-programming.html"><a href="r-programming.html#argument-matching"><i class="fa fa-check"></i><b>3.4.8</b> Argument Matching</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="r-programming.html"><a href="r-programming.html#environment"><i class="fa fa-check"></i><b>3.5</b> Environment</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="r-programming.html"><a href="r-programming.html#loading-.rdata-files"><i class="fa fa-check"></i><b>3.5.1</b> Loading <code>.RData</code> Files</a></li>
+<li class="chapter" data-level="3.5.2" data-path="r-programming.html"><a href="r-programming.html#listing-objects"><i class="fa fa-check"></i><b>3.5.2</b> Listing Objects</a></li>
+<li class="chapter" data-level="3.5.3" data-path="r-programming.html"><a href="r-programming.html#removing-objects"><i class="fa fa-check"></i><b>3.5.3</b> Removing Objects</a></li>
+<li class="chapter" data-level="3.5.4" data-path="r-programming.html"><a href="r-programming.html#advanced"><i class="fa fa-check"></i><b>3.5.4</b> Advanced</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-programming.html"><a href="r-programming.html#packages"><i class="fa fa-check"></i><b>3.6</b> Packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="r-programming.html"><a href="r-programming.html#rationale-2"><i class="fa fa-check"></i><b>3.6.1</b> Rationale</a></li>
+<li class="chapter" data-level="3.6.2" data-path="r-programming.html"><a href="r-programming.html#contents-of-a-package"><i class="fa fa-check"></i><b>3.6.2</b> Contents of a Package</a></li>
+<li class="chapter" data-level="3.6.3" data-path="r-programming.html"><a href="r-programming.html#installing-packages"><i class="fa fa-check"></i><b>3.6.3</b> Installing Packages</a></li>
+<li class="chapter" data-level="3.6.4" data-path="r-programming.html"><a href="r-programming.html#loading-packages"><i class="fa fa-check"></i><b>3.6.4</b> Loading Packages</a></li>
+<li class="chapter" data-level="3.6.5" data-path="r-programming.html"><a href="r-programming.html#getting-started-with-a-package"><i class="fa fa-check"></i><b>3.6.5</b> Getting Started with a Package</a></li>
+<li class="chapter" data-level="3.6.6" data-path="r-programming.html"><a href="r-programming.html#specifying-a-function-within-a-package"><i class="fa fa-check"></i><b>3.6.6</b> Specifying a Function within a Package</a></li>
+<li class="chapter" data-level="3.6.7" data-path="r-programming.html"><a href="r-programming.html#more-on-packages"><i class="fa fa-check"></i><b>3.6.7</b> More on Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="r-programming.html"><a href="r-programming.html#organizing-your-code"><i class="fa fa-check"></i><b>3.7</b> Organizing Your Code</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="r-programming.html"><a href="r-programming.html#suggestions"><i class="fa fa-check"></i><b>3.7.1</b> Suggestions</a></li>
+<li class="chapter" data-level="3.7.2" data-path="r-programming.html"><a href="r-programming.html#where-to-put-files"><i class="fa fa-check"></i><b>3.7.2</b> Where to Put Files</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="getting-data-in-and-out-of-r.html"><a href="getting-data-in-and-out-of-r.html"><i class="fa fa-check"></i><b>4</b> Getting Data In and Out of R</a><ul>
+<li class="chapter" data-level="4.1" data-path="getting-data-in-and-out-of-r.html"><a href="getting-data-in-and-out-of-r.html#rdata-files"><i class="fa fa-check"></i><b>4.1</b> <code>.RData</code> Files</a></li>
+<li class="chapter" data-level="4.2" data-path="getting-data-in-and-out-of-r.html"><a href="getting-data-in-and-out-of-r.html#readr-package"><i class="fa fa-check"></i><b>4.2</b> <code>readr</code> Package</a></li>
+<li class="chapter" data-level="4.3" data-path="getting-data-in-and-out-of-r.html"><a href="getting-data-in-and-out-of-r.html#scraping-from-the-web"><i class="fa fa-check"></i><b>4.3</b> Scraping from the Web</a></li>
+<li class="chapter" data-level="4.4" data-path="getting-data-in-and-out-of-r.html"><a href="getting-data-in-and-out-of-r.html#apis"><i class="fa fa-check"></i><b>4.4</b> APIs</a></li>
+</ul></li>
+<li class="part"><span><b>II Data Wrangling</b></span></li>
+<li class="chapter" data-level="5" data-path="data-wrangling-chapter.html"><a href="data-wrangling-chapter.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-wrangling-chapter.html"><a href="data-wrangling-chapter.html#definition"><i class="fa fa-check"></i><b>5.1</b> Definition</a></li>
+<li class="chapter" data-level="5.2" data-path="data-wrangling-chapter.html"><a href="data-wrangling-chapter.html#wrangling-challenges"><i class="fa fa-check"></i><b>5.2</b> Wrangling Challenges</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>6</b> Tidy Data</a><ul>
+<li class="chapter" data-level="6.1" data-path="tidy-data.html"><a href="tidy-data.html#motivation"><i class="fa fa-check"></i><b>6.1</b> Motivation</a></li>
+<li class="chapter" data-level="6.2" data-path="tidy-data.html"><a href="tidy-data.html#definition-1"><i class="fa fa-check"></i><b>6.2</b> Definition</a></li>
+<li class="chapter" data-level="6.3" data-path="tidy-data.html"><a href="tidy-data.html#example-titanic-data"><i class="fa fa-check"></i><b>6.3</b> Example: Titanic Data</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="tidy-data.html"><a href="tidy-data.html#intuitive-format"><i class="fa fa-check"></i><b>6.3.1</b> Intuitive Format</a></li>
+<li class="chapter" data-level="6.3.2" data-path="tidy-data.html"><a href="tidy-data.html#tidy-format"><i class="fa fa-check"></i><b>6.3.2</b> Tidy Format</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="tidy-data.html"><a href="tidy-data.html#rules-of-thumb"><i class="fa fa-check"></i><b>6.4</b> Rules of Thumb</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>7</b> Tidyverse</a><ul>
+<li class="chapter" data-level="7.1" data-path="tidyverse.html"><a href="tidyverse.html#idea"><i class="fa fa-check"></i><b>7.1</b> Idea</a></li>
+<li class="chapter" data-level="7.2" data-path="tidyverse.html"><a href="tidyverse.html#packages-1"><i class="fa fa-check"></i><b>7.2</b> Packages</a></li>
+<li class="chapter" data-level="7.3" data-path="tidyverse.html"><a href="tidyverse.html#primary-packages"><i class="fa fa-check"></i><b>7.3</b> Primary Packages</a></li>
+<li class="chapter" data-level="7.4" data-path="tidyverse.html"><a href="tidyverse.html#tidying-data"><i class="fa fa-check"></i><b>7.4</b> Tidying Data</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="tidyverse.html"><a href="tidyverse.html#tidyr-package"><i class="fa fa-check"></i><b>7.4.1</b> <code>tidyr</code> Package</a></li>
+<li class="chapter" data-level="7.4.2" data-path="tidyverse.html"><a href="tidyverse.html#untidy-titanic-data"><i class="fa fa-check"></i><b>7.4.2</b> Untidy Titanic Data</a></li>
+<li class="chapter" data-level="7.4.3" data-path="tidyverse.html"><a href="tidyverse.html#gather"><i class="fa fa-check"></i><b>7.4.3</b> <code>gather()</code></a></li>
+<li class="chapter" data-level="7.4.4" data-path="tidyverse.html"><a href="tidyverse.html#spread"><i class="fa fa-check"></i><b>7.4.4</b> <code>spread()</code></a></li>
+<li class="chapter" data-level="7.4.5" data-path="tidyverse.html"><a href="tidyverse.html#tidy-with-spread"><i class="fa fa-check"></i><b>7.4.5</b> Tidy with <code>spread()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="tidyverse.html"><a href="tidyverse.html#reshaping-data"><i class="fa fa-check"></i><b>7.5</b> Reshaping Data</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="tidyverse.html"><a href="tidyverse.html#wide-vs.long-format"><i class="fa fa-check"></i><b>7.5.1</b> Wide vs. Long Format</a></li>
+<li class="chapter" data-level="7.5.2" data-path="tidyverse.html"><a href="tidyverse.html#reshape2-package"><i class="fa fa-check"></i><b>7.5.2</b> <code>reshape2</code> Package</a></li>
+<li class="chapter" data-level="7.5.3" data-path="tidyverse.html"><a href="tidyverse.html#air-quality-data-set"><i class="fa fa-check"></i><b>7.5.3</b> Air Quality Data Set</a></li>
+<li class="chapter" data-level="7.5.4" data-path="tidyverse.html"><a href="tidyverse.html#melt"><i class="fa fa-check"></i><b>7.5.4</b> Melt</a></li>
+<li class="chapter" data-level="7.5.5" data-path="tidyverse.html"><a href="tidyverse.html#guided-melt"><i class="fa fa-check"></i><b>7.5.5</b> Guided Melt</a></li>
+<li class="chapter" data-level="7.5.6" data-path="tidyverse.html"><a href="tidyverse.html#casting"><i class="fa fa-check"></i><b>7.5.6</b> Casting</a></li>
+<li class="chapter" data-level="7.5.7" data-path="tidyverse.html"><a href="tidyverse.html#dcast"><i class="fa fa-check"></i><b>7.5.7</b> <code>dcast()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>8</b> Transforming Data</a><ul>
+<li class="chapter" data-level="8.1" data-path="transforming-data.html"><a href="transforming-data.html#dplyr-package"><i class="fa fa-check"></i><b>8.1</b> <code>dplyr</code> Package</a></li>
+<li class="chapter" data-level="8.2" data-path="transforming-data.html"><a href="transforming-data.html#grammar-of-dplyr"><i class="fa fa-check"></i><b>8.2</b> Grammar of <code>dplyr</code></a></li>
+<li class="chapter" data-level="8.3" data-path="transforming-data.html"><a href="transforming-data.html#baby-names-data-set"><i class="fa fa-check"></i><b>8.3</b> Baby Names Data Set</a></li>
+<li class="chapter" data-level="8.4" data-path="transforming-data.html"><a href="transforming-data.html#operator"><i class="fa fa-check"></i><b>8.4</b> <code>%&gt;%</code> Operator</a></li>
+<li class="chapter" data-level="8.5" data-path="transforming-data.html"><a href="transforming-data.html#filter"><i class="fa fa-check"></i><b>8.5</b> <code>filter()</code></a></li>
+<li class="chapter" data-level="8.6" data-path="transforming-data.html"><a href="transforming-data.html#arrange"><i class="fa fa-check"></i><b>8.6</b> <code>arrange()</code></a></li>
+<li class="chapter" data-level="8.7" data-path="transforming-data.html"><a href="transforming-data.html#rename"><i class="fa fa-check"></i><b>8.7</b> <code>rename()</code></a></li>
+<li class="chapter" data-level="8.8" data-path="transforming-data.html"><a href="transforming-data.html#select"><i class="fa fa-check"></i><b>8.8</b> <code>select()</code></a></li>
+<li class="chapter" data-level="8.9" data-path="transforming-data.html"><a href="transforming-data.html#mutate"><i class="fa fa-check"></i><b>8.9</b> <code>mutate()</code></a></li>
+<li class="chapter" data-level="8.10" data-path="transforming-data.html"><a href="transforming-data.html#distinct"><i class="fa fa-check"></i><b>8.10</b> <code>distinct()</code></a></li>
+<li class="chapter" data-level="8.11" data-path="transforming-data.html"><a href="transforming-data.html#summarize"><i class="fa fa-check"></i><b>8.11</b> <code>summarize()</code></a></li>
+<li class="chapter" data-level="8.12" data-path="transforming-data.html"><a href="transforming-data.html#group_by"><i class="fa fa-check"></i><b>8.12</b> <code>group_by()</code></a></li>
+<li class="chapter" data-level="8.13" data-path="transforming-data.html"><a href="transforming-data.html#chaining-verbs-together"><i class="fa fa-check"></i><b>8.13</b> Chaining Verbs Together</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>9</b> Relational Data</a><ul>
+<li class="chapter" data-level="9.1" data-path="relational-data.html"><a href="relational-data.html#multiple-data-sets"><i class="fa fa-check"></i><b>9.1</b> Multiple Data Sets</a></li>
+<li class="chapter" data-level="9.2" data-path="relational-data.html"><a href="relational-data.html#toy-example"><i class="fa fa-check"></i><b>9.2</b> Toy Example</a></li>
+<li class="chapter" data-level="9.3" data-path="relational-data.html"><a href="relational-data.html#verbs"><i class="fa fa-check"></i><b>9.3</b> Verbs</a></li>
+<li class="chapter" data-level="9.4" data-path="relational-data.html"><a href="relational-data.html#inner_join"><i class="fa fa-check"></i><b>9.4</b> <code>inner_join()</code></a></li>
+<li class="chapter" data-level="9.5" data-path="relational-data.html"><a href="relational-data.html#left_join"><i class="fa fa-check"></i><b>9.5</b> <code>left_join()</code></a></li>
+<li class="chapter" data-level="9.6" data-path="relational-data.html"><a href="relational-data.html#right_join"><i class="fa fa-check"></i><b>9.6</b> <code>right_join()</code></a></li>
+<li class="chapter" data-level="9.7" data-path="relational-data.html"><a href="relational-data.html#full_join"><i class="fa fa-check"></i><b>9.7</b> <code>full_join()</code></a></li>
+<li class="chapter" data-level="9.8" data-path="relational-data.html"><a href="relational-data.html#anti_join"><i class="fa fa-check"></i><b>9.8</b> <code>anti_join()</code></a></li>
+<li class="chapter" data-level="9.9" data-path="relational-data.html"><a href="relational-data.html#semi_join"><i class="fa fa-check"></i><b>9.9</b> <code>semi_join()</code></a></li>
+<li class="chapter" data-level="9.10" data-path="relational-data.html"><a href="relational-data.html#repeated-key-values"><i class="fa fa-check"></i><b>9.10</b> Repeated Key Values</a></li>
+<li class="chapter" data-level="9.11" data-path="relational-data.html"><a href="relational-data.html#set-operations"><i class="fa fa-check"></i><b>9.11</b> Set Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html"><i class="fa fa-check"></i><b>10</b> Case Study in Data Wrangling</a><ul>
+<li class="chapter" data-level="10.1" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html#yeast-genomics"><i class="fa fa-check"></i><b>10.1</b> Yeast Genomics</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html#load-data"><i class="fa fa-check"></i><b>10.1.1</b> Load Data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html#gene-expression-matrices"><i class="fa fa-check"></i><b>10.1.2</b> Gene Expression Matrices</a></li>
+<li class="chapter" data-level="10.1.3" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html#gene-position-matrix"><i class="fa fa-check"></i><b>10.1.3</b> Gene Position Matrix</a></li>
+<li class="chapter" data-level="10.1.4" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html#row-names"><i class="fa fa-check"></i><b>10.1.4</b> Row Names</a></li>
+<li class="chapter" data-level="10.1.5" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html#unify-column-names"><i class="fa fa-check"></i><b>10.1.5</b> Unify Column Names</a></li>
+<li class="chapter" data-level="10.1.6" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html#gene-positions"><i class="fa fa-check"></i><b>10.1.6</b> Gene Positions</a></li>
+<li class="chapter" data-level="10.1.7" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html#tidy-each-expression-matrix"><i class="fa fa-check"></i><b>10.1.7</b> Tidy Each Expression Matrix</a></li>
+<li class="chapter" data-level="10.1.8" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html#combine-into-single-data-frame"><i class="fa fa-check"></i><b>10.1.8</b> Combine Into Single Data Frame</a></li>
+<li class="chapter" data-level="10.1.9" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html#join-gene-positions"><i class="fa fa-check"></i><b>10.1.9</b> Join Gene Positions</a></li>
+<li class="chapter" data-level="10.1.10" data-path="case-study-in-data-wrangling.html"><a href="case-study-in-data-wrangling.html#apply-dplyr-functions"><i class="fa fa-check"></i><b>10.1.10</b> Apply <code>dplyr</code> Functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>11</b> Further Reading</a><ul>
+<li class="chapter" data-level="11.1" data-path="further-reading.html"><a href="further-reading.html#additional-examples"><i class="fa fa-check"></i><b>11.1</b> Additional Examples</a></li>
+<li class="chapter" data-level="11.2" data-path="further-reading.html"><a href="further-reading.html#additional-dplyr-features"><i class="fa fa-check"></i><b>11.2</b> Additional <code>dplyr</code> Features</a></li>
+</ul></li>
+<li class="part"><span><b>III Expoloratory Data Analysis</b></span></li>
+<li class="chapter" data-level="12" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>12</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="12.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#what-is-eda"><i class="fa fa-check"></i><b>12.1</b> What is EDA?</a></li>
+<li class="chapter" data-level="12.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#descriptive-statistics-examples"><i class="fa fa-check"></i><b>12.2</b> Descriptive Statistics Examples</a></li>
+<li class="chapter" data-level="12.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#components-of-eda"><i class="fa fa-check"></i><b>12.3</b> Components of EDA</a></li>
+<li class="chapter" data-level="12.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-sets"><i class="fa fa-check"></i><b>12.4</b> Data Sets</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-mtcars"><i class="fa fa-check"></i><b>12.4.1</b> Data <code>mtcars</code></a></li>
+<li class="chapter" data-level="12.4.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-mpg"><i class="fa fa-check"></i><b>12.4.2</b> Data <code>mpg</code></a></li>
+<li class="chapter" data-level="12.4.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-diamonds"><i class="fa fa-check"></i><b>12.4.3</b> Data <code>diamonds</code></a></li>
+<li class="chapter" data-level="12.4.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-gapminder"><i class="fa fa-check"></i><b>12.4.4</b> Data <code>gapminder</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html"><i class="fa fa-check"></i><b>13</b> Numerical Summaries of Data</a><ul>
+<li class="chapter" data-level="13.1" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#useful-summaries"><i class="fa fa-check"></i><b>13.1</b> Useful Summaries</a></li>
+<li class="chapter" data-level="13.2" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#measures-of-center"><i class="fa fa-check"></i><b>13.2</b> Measures of Center</a></li>
+<li class="chapter" data-level="13.3" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#mean-median-and-mode-in-r"><i class="fa fa-check"></i><b>13.3</b> Mean, Median, and Mode in R</a></li>
+<li class="chapter" data-level="13.4" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#quantiles-and-percentiles"><i class="fa fa-check"></i><b>13.4</b> Quantiles and Percentiles</a></li>
+<li class="chapter" data-level="13.5" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#five-number-summary"><i class="fa fa-check"></i><b>13.5</b> Five Number Summary</a></li>
+<li class="chapter" data-level="13.6" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#measures-of-spread"><i class="fa fa-check"></i><b>13.6</b> Measures of Spread</a></li>
+<li class="chapter" data-level="13.7" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#variance-sd-and-iqr-in-r"><i class="fa fa-check"></i><b>13.7</b> Variance, SD, and IQR in R</a></li>
+<li class="chapter" data-level="13.8" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#identifying-outliers"><i class="fa fa-check"></i><b>13.8</b> Identifying Outliers</a></li>
+<li class="chapter" data-level="13.9" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#application-to-mtcars-data"><i class="fa fa-check"></i><b>13.9</b> Application to <code>mtcars</code> Data</a></li>
+<li class="chapter" data-level="13.10" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#measuring-symmetry"><i class="fa fa-check"></i><b>13.10</b> Measuring Symmetry</a></li>
+<li class="chapter" data-level="13.11" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#skewness-function"><i class="fa fa-check"></i><b>13.11</b> <code>skewness()</code> Function</a></li>
+<li class="chapter" data-level="13.12" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#measuring-tails"><i class="fa fa-check"></i><b>13.12</b> Measuring Tails</a></li>
+<li class="chapter" data-level="13.13" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#excess-kurtosis"><i class="fa fa-check"></i><b>13.13</b> Excess Kurtosis</a></li>
+<li class="chapter" data-level="13.14" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#kurtosis-function"><i class="fa fa-check"></i><b>13.14</b> <code>kurtosis()</code> Function</a></li>
+<li class="chapter" data-level="13.15" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#visualizing-skewness-and-kurtosis"><i class="fa fa-check"></i><b>13.15</b> Visualizing Skewness and Kurtosis</a></li>
+<li class="chapter" data-level="13.16" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#covariance-and-correlation"><i class="fa fa-check"></i><b>13.16</b> Covariance and Correlation</a><ul>
+<li class="chapter" data-level="13.16.1" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#covariance"><i class="fa fa-check"></i><b>13.16.1</b> Covariance</a></li>
+<li class="chapter" data-level="13.16.2" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#pearson-correlation"><i class="fa fa-check"></i><b>13.16.2</b> Pearson Correlation</a></li>
+<li class="chapter" data-level="13.16.3" data-path="numerical-summaries-of-data.html"><a href="numerical-summaries-of-data.html#spearman-correlation"><i class="fa fa-check"></i><b>13.16.3</b> Spearman Correlation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html"><i class="fa fa-check"></i><b>14</b> Data Visualization Basics</a><ul>
+<li class="chapter" data-level="14.1" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#plots"><i class="fa fa-check"></i><b>14.1</b> Plots</a></li>
+<li class="chapter" data-level="14.2" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#r-base-graphics"><i class="fa fa-check"></i><b>14.2</b> R Base Graphics</a></li>
+<li class="chapter" data-level="14.3" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#read-the-documentation"><i class="fa fa-check"></i><b>14.3</b> Read the Documentation</a></li>
+<li class="chapter" data-level="14.4" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#barplot"><i class="fa fa-check"></i><b>14.4</b> Barplot</a></li>
+<li class="chapter" data-level="14.5" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#boxplot"><i class="fa fa-check"></i><b>14.5</b> Boxplot</a></li>
+<li class="chapter" data-level="14.6" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#constructing-boxplots"><i class="fa fa-check"></i><b>14.6</b> Constructing Boxplots</a></li>
+<li class="chapter" data-level="14.7" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#boxplot-with-outliers"><i class="fa fa-check"></i><b>14.7</b> Boxplot with Outliers</a></li>
+<li class="chapter" data-level="14.8" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#histogram"><i class="fa fa-check"></i><b>14.8</b> Histogram</a></li>
+<li class="chapter" data-level="14.9" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#histogram-with-more-breaks"><i class="fa fa-check"></i><b>14.9</b> Histogram with More Breaks</a></li>
+<li class="chapter" data-level="14.10" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#density-plot"><i class="fa fa-check"></i><b>14.10</b> Density Plot</a></li>
+<li class="chapter" data-level="14.11" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#boxplot-side-by-side"><i class="fa fa-check"></i><b>14.11</b> Boxplot (Side-By-Side)</a></li>
+<li class="chapter" data-level="14.12" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#stacked-barplot"><i class="fa fa-check"></i><b>14.12</b> Stacked Barplot</a></li>
+<li class="chapter" data-level="14.13" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#scatterplot"><i class="fa fa-check"></i><b>14.13</b> Scatterplot</a></li>
+<li class="chapter" data-level="14.14" data-path="data-visualization-basics.html"><a href="data-visualization-basics.html#quantile-quantile-plots"><i class="fa fa-check"></i><b>14.14</b> Quantile-Quantile Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html"><i class="fa fa-check"></i><b>15</b> A Grammar of Graphics</a><ul>
+<li class="chapter" data-level="15.1" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#rationale-3"><i class="fa fa-check"></i><b>15.1</b> Rationale</a></li>
+<li class="chapter" data-level="15.2" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#package-ggplot2"><i class="fa fa-check"></i><b>15.2</b> Package <code>ggplot2</code></a></li>
+<li class="chapter" data-level="15.3" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#pieces-of-the-grammar"><i class="fa fa-check"></i><b>15.3</b> Pieces of the Grammar</a></li>
+<li class="chapter" data-level="15.4" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#geometries"><i class="fa fa-check"></i><b>15.4</b> Geometries</a></li>
+<li class="chapter" data-level="15.5" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#call-format"><i class="fa fa-check"></i><b>15.5</b> Call Format</a></li>
+<li class="chapter" data-level="15.6" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#layers"><i class="fa fa-check"></i><b>15.6</b> Layers</a></li>
+<li class="chapter" data-level="15.7" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#placement-of-the-aes-call"><i class="fa fa-check"></i><b>15.7</b> Placement of the <code>aes()</code> Call</a></li>
+<li class="chapter" data-level="15.8" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#original-publications"><i class="fa fa-check"></i><b>15.8</b> Original Publications</a></li>
+<li class="chapter" data-level="15.9" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#documentation"><i class="fa fa-check"></i><b>15.9</b> Documentation</a></li>
+<li class="chapter" data-level="15.10" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#barplots"><i class="fa fa-check"></i><b>15.10</b> Barplots</a></li>
+<li class="chapter" data-level="15.11" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#boxplots-and-violin-plots"><i class="fa fa-check"></i><b>15.11</b> Boxplots and Violin Plots</a></li>
+<li class="chapter" data-level="15.12" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>15.12</b> Histograms and Density Plots</a></li>
+<li class="chapter" data-level="15.13" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#line-plots"><i class="fa fa-check"></i><b>15.13</b> Line Plots</a></li>
+<li class="chapter" data-level="15.14" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#scatterplots"><i class="fa fa-check"></i><b>15.14</b> Scatterplots</a></li>
+<li class="chapter" data-level="15.15" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#axis-scales"><i class="fa fa-check"></i><b>15.15</b> Axis Scales</a></li>
+<li class="chapter" data-level="15.16" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#scatterplot-smoothers"><i class="fa fa-check"></i><b>15.16</b> Scatterplot Smoothers</a></li>
+<li class="chapter" data-level="15.17" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#overplotting"><i class="fa fa-check"></i><b>15.17</b> Overplotting</a></li>
+<li class="chapter" data-level="15.18" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#labels-and-legends"><i class="fa fa-check"></i><b>15.18</b> Labels and Legends</a></li>
+<li class="chapter" data-level="15.19" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#facets"><i class="fa fa-check"></i><b>15.19</b> Facets</a></li>
+<li class="chapter" data-level="15.20" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#colors"><i class="fa fa-check"></i><b>15.20</b> Colors</a><ul>
+<li class="chapter" data-level="15.20.1" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#finding-colors"><i class="fa fa-check"></i><b>15.20.1</b> Finding Colors</a></li>
+<li class="chapter" data-level="15.20.2" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#some-useful-layers"><i class="fa fa-check"></i><b>15.20.2</b> Some Useful Layers</a></li>
+</ul></li>
+<li class="chapter" data-level="15.21" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#saving-plots"><i class="fa fa-check"></i><b>15.21</b> Saving Plots</a><ul>
+<li class="chapter" data-level="15.21.1" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#saving-plots-as-variables"><i class="fa fa-check"></i><b>15.21.1</b> Saving Plots as Variables</a></li>
+<li class="chapter" data-level="15.21.2" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#saving-plots-to-files"><i class="fa fa-check"></i><b>15.21.2</b> Saving Plots to Files</a></li>
+</ul></li>
+<li class="chapter" data-level="15.22" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#dynamic-visualization"><i class="fa fa-check"></i><b>15.22</b> Dynamic Visualization</a></li>
+<li class="chapter" data-level="15.23" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#themes"><i class="fa fa-check"></i><b>15.23</b> Themes</a><ul>
+<li class="chapter" data-level="15.23.1" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#available-themes"><i class="fa fa-check"></i><b>15.23.1</b> Available Themes</a></li>
+<li class="chapter" data-level="15.23.2" data-path="a-grammar-of-graphics.html"><a href="a-grammar-of-graphics.html#setting-a-theme"><i class="fa fa-check"></i><b>15.23.2</b> Setting a Theme</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="session-information.html"><a href="session-information.html"><i class="fa fa-check"></i>Session Information</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">YARP, Yet Another R Primer</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="case-study-in-data-wrangling" class="section level1">
+<h1><span class="header-section-number">10</span> Case Study in Data Wrangling</h1>
+<div id="yeast-genomics" class="section level2">
+<h2><span class="header-section-number">10.1</span> Yeast Genomics</h2>
+<p><a href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0060083">Smith and Kruglyak (2008)</a> is a study that measured 2820 genotypes in 109 yeast F1 segregants from a cross between parental lines BY and RM.</p>
+<p>They also measured gene expression on 4482 genes in each of these segregants when growing in two different Carbon sources, glucose and ethanol.</p>
+<div id="load-data" class="section level3">
+<h3><span class="header-section-number">10.1.1</span> Load Data</h3>
+<p>The data was distributed as a collection of matrices in R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>())
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">load</span>(<span class="st">&quot;./data/smith_kruglyak.RData&quot;</span>)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">ls</span>()
+[<span class="dv">1</span>] <span class="st">&quot;exp.e&quot;</span>      <span class="st">&quot;exp.g&quot;</span>      <span class="st">&quot;exp.pos&quot;</span>    <span class="st">&quot;marker&quot;</span>     <span class="st">&quot;marker.pos&quot;</span>
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">eapply</span>(<span class="dt">env=</span>.GlobalEnv, dim)
+<span class="op">$</span>exp.e
+[<span class="dv">1</span>] <span class="dv">4482</span>  <span class="dv">109</span>
+
+<span class="op">$</span>exp.g
+[<span class="dv">1</span>] <span class="dv">4482</span>  <span class="dv">109</span>
+
+<span class="op">$</span>marker
+[<span class="dv">1</span>] <span class="dv">2820</span>  <span class="dv">109</span>
+
+<span class="op">$</span>exp.pos
+[<span class="dv">1</span>] <span class="dv">4482</span>    <span class="dv">3</span>
+
+<span class="op">$</span>marker.pos
+[<span class="dv">1</span>] <span class="dv">2820</span>    <span class="dv">2</span></code></pre></div>
+</div>
+<div id="gene-expression-matrices" class="section level3">
+<h3><span class="header-section-number">10.1.2</span> Gene Expression Matrices</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>exp.g <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rownames</span>(exp.g), .) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="op">+</span><span class="st">   </span><span class="kw">print</span>()
+Warning<span class="op">:</span><span class="st"> `</span><span class="dt">as_tibble.matrix()</span><span class="st">`</span> requires a matrix with column names or a <span class="st">`</span><span class="dt">.name_repair</span><span class="st">`</span> argument. Using compatibility <span class="st">`</span><span class="dt">.name_repair</span><span class="st">`</span>.
+This warning is displayed once per session.
+<span class="co"># A tibble: 4,482 x 110</span>
+   V1    X100g.20_4_c.gl… X101g.21_1_d.gl… X102g.21_2_d.gl…
+   <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">           </span>
+<span class="st"> </span><span class="dv">1</span> YJR1… <span class="fl">0.22</span>             <span class="fl">0.18</span>             <span class="fl">0.05</span>            
+ <span class="dv">2</span> YPL2… <span class="op">-</span><span class="fl">0.29</span>            <span class="op">-</span><span class="fl">0.2</span>             <span class="op">-</span><span class="fl">0.19</span>           
+ <span class="dv">3</span> YDR5… <span class="fl">0.72</span>             <span class="fl">0.04</span>             <span class="fl">0.26</span>            
+ <span class="dv">4</span> YDR2… <span class="fl">0.23</span>             <span class="fl">0.31</span>             <span class="fl">0.12</span>            
+ <span class="dv">5</span> YHR0… <span class="fl">0.4</span>              <span class="op">-</span><span class="fl">0.04</span>            <span class="fl">0.36</span>            
+ <span class="dv">6</span> YFR0… <span class="op">-</span><span class="fl">0.36</span>            <span class="fl">0.35</span>             <span class="op">-</span><span class="fl">0.26</span>           
+ <span class="dv">7</span> YPL1… <span class="fl">0.23</span>             <span class="op">-</span><span class="fl">0.21</span>            <span class="op">-</span><span class="fl">0.25</span>           
+ <span class="dv">8</span> YDR0… <span class="op">-</span><span class="fl">0.09</span>            <span class="fl">0.57</span>             <span class="fl">0.24</span>            
+ <span class="dv">9</span> YLR3… <span class="op">-</span><span class="fl">0.23</span>            <span class="fl">0.13</span>             <span class="op">-</span><span class="fl">0.17</span>           
+<span class="dv">10</span> YCR0… <span class="op">-</span><span class="fl">0.25</span>            <span class="op">-</span><span class="fl">0.98</span>            <span class="op">-</span><span class="fl">0.3</span>            
+<span class="co"># … with 4,472 more rows, and 106 more variables:</span>
+<span class="co">#   X103g.21_3_d.glucose &lt;chr&gt;, X104g.21_4_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X105g.21_5_c.glucose &lt;chr&gt;, X106g.22_2_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X107g.22_3_b.glucose &lt;chr&gt;, X109g.22_5_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X10g.2_5_d.glucose &lt;chr&gt;, X110g.23_3_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X111g.23_5_d.glucose &lt;chr&gt;, X112g.24_1_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X113g.25_1_d.glucose &lt;chr&gt;, X114g.25_3_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X115g.25_4_d.glucose &lt;chr&gt;, X116g.26_1_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X117g.26_2_d.glucose &lt;chr&gt;, X11g.2_6_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X12g.2_7_a.glucose &lt;chr&gt;, X13g.3_1_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X15g.3_3_d.glucose &lt;chr&gt;, X16g.3_4_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X17g.3_5_d.glucose &lt;chr&gt;, X18g.4_1_c.glucose &lt;chr&gt;,</span>
+<span class="co">#   X1g.1_1_d.glucose &lt;chr&gt;, X20g.4_3_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X21g.4_4_d.glucose &lt;chr&gt;, X22g.5_1_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X23g.5_2_d.glucose &lt;chr&gt;, X24g.5_3_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X25g.5_4_d.glucose &lt;chr&gt;, X26g.5_5_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X27g.6_1_d.glucose &lt;chr&gt;, X28g.6_2_b.glucose &lt;chr&gt;,</span>
+<span class="co">#   X29g.6_3_c.glucose &lt;chr&gt;, X30g.6_4_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X31g.6_5_d.glucose &lt;chr&gt;, X32g.6_6_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X33g.6_7_d.glucose &lt;chr&gt;, X34g.7_1_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X35g.7_2_c.glucose &lt;chr&gt;, X36g.7_3_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X37g.7_4_c.glucose &lt;chr&gt;, X38g.7_5_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X39g.7_6_c.glucose &lt;chr&gt;, X3g.1_3_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X40g.7_7_c.glucose &lt;chr&gt;, X41g.7_8_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X42g.8_1_a.glucose &lt;chr&gt;, X43g.8_2_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X44g.8_3_a.glucose &lt;chr&gt;, X45g.8_4_c.glucose &lt;chr&gt;,</span>
+<span class="co">#   X46g.8_5_b.glucose &lt;chr&gt;, X47g.8_6_c.glucose &lt;chr&gt;,</span>
+<span class="co">#   X48g.8_7_b.glucose &lt;chr&gt;, X49g.9_1_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X4g.1_4_d.glucose &lt;chr&gt;, X50g.9_2_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X51g.9_3_d.glucose &lt;chr&gt;, X52g.9_4_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X53g.9_5_d.glucose &lt;chr&gt;, X54g.9_6_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X55g.9_7_d.glucose &lt;chr&gt;, X56g.10_1_c.glucose &lt;chr&gt;,</span>
+<span class="co">#   X57g.10_2_d.glucose &lt;chr&gt;, X58g.10_3_c.glucose &lt;chr&gt;,</span>
+<span class="co">#   X59g.10_4_d.glucose &lt;chr&gt;, X5g.1_5_c.glucose &lt;chr&gt;,</span>
+<span class="co">#   X60g.11_1_a.glucose &lt;chr&gt;, X61g.11_2_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X62g.11_3_b.glucose &lt;chr&gt;, X63g.12_1_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X64g.12_2_b.glucose &lt;chr&gt;, X65g.13_1_a.glucose &lt;chr&gt;,</span>
+<span class="co">#   X66g.13_2_c.glucose &lt;chr&gt;, X67g.13_3_b.glucose &lt;chr&gt;,</span>
+<span class="co">#   X68g.13_4_a.glucose &lt;chr&gt;, X69g.13_5_c.glucose &lt;chr&gt;,</span>
+<span class="co">#   X70g.14_1_b.glucose &lt;chr&gt;, X71g.14_2_c.glucose &lt;chr&gt;,</span>
+<span class="co">#   X73g.14_4_a.glucose &lt;chr&gt;, X74g.14_5_b.glucose &lt;chr&gt;,</span>
+<span class="co">#   X75g.14_6_d.glucose &lt;chr&gt;, X76g.14_7_c.glucose &lt;chr&gt;,</span>
+<span class="co">#   X77g.15_2_d.glucose &lt;chr&gt;, X78g.15_3_b.glucose &lt;chr&gt;,</span>
+<span class="co">#   X79g.15_4_d.glucose &lt;chr&gt;, X7g.2_2_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X80g.15_5_b.glucose &lt;chr&gt;, X82g.16_1_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X83g.17_1_a.glucose &lt;chr&gt;, X84g.17_2_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X85g.17_4_a.glucose &lt;chr&gt;, X86g.17_5_b.glucose &lt;chr&gt;,</span>
+<span class="co">#   X87g.18_1_d.glucose &lt;chr&gt;, X88g.18_2_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X89g.18_3_d.glucose &lt;chr&gt;, X8g.2_3_d.glucose &lt;chr&gt;,</span>
+<span class="co">#   X90g.18_4_c.glucose &lt;chr&gt;, X92g.19_1_c.glucose &lt;chr&gt;,</span>
+<span class="co">#   X93g.19_2_c.glucose &lt;chr&gt;, X94g.19_3_c.glucose &lt;chr&gt;, …</span></code></pre></div>
+</div>
+<div id="gene-position-matrix" class="section level3">
+<h3><span class="header-section-number">10.1.3</span> Gene Position Matrix</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>exp.pos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cbind</span>(<span class="kw">rownames</span>(exp.pos), .) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="op">+</span><span class="st">   </span><span class="kw">print</span>()
+<span class="co"># A tibble: 4,482 x 4</span>
+   V1      Chromsome Start_coord End_coord
+   <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">       </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">    </span>
+<span class="st"> </span><span class="dv">1</span> YJR107W <span class="dv">10</span>        <span class="dv">627333</span>      <span class="dv">628319</span>   
+ <span class="dv">2</span> YPL270W <span class="dv">16</span>        <span class="dv">30482</span>       <span class="dv">32803</span>    
+ <span class="dv">3</span> YDR518W <span class="dv">4</span>         <span class="dv">1478600</span>     <span class="dv">1480153</span>  
+ <span class="dv">4</span> YDR233C <span class="dv">4</span>         <span class="dv">930353</span>      <span class="dv">929466</span>   
+ <span class="dv">5</span> YHR098C <span class="dv">8</span>         <span class="dv">301937</span>      <span class="dv">299148</span>   
+ <span class="dv">6</span> YFR029W <span class="dv">6</span>         <span class="dv">210925</span>      <span class="dv">212961</span>   
+ <span class="dv">7</span> YPL198W <span class="dv">16</span>        <span class="dv">173151</span>      <span class="dv">174701</span>   
+ <span class="dv">8</span> YDR001C <span class="dv">4</span>         <span class="dv">452472</span>      <span class="dv">450217</span>   
+ <span class="dv">9</span> YLR394W <span class="dv">12</span>        <span class="dv">907950</span>      <span class="dv">909398</span>   
+<span class="dv">10</span> YCR079W <span class="dv">3</span>         <span class="dv">252842</span>      <span class="dv">254170</span>   
+<span class="co"># … with 4,472 more rows</span></code></pre></div>
+</div>
+<div id="row-names" class="section level3">
+<h3><span class="header-section-number">10.1.4</span> Row Names</h3>
+<p>The gene names are contained in the row names.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">head</span>(<span class="kw">rownames</span>(exp.g))
+[<span class="dv">1</span>] <span class="st">&quot;YJR107W&quot;</span> <span class="st">&quot;YPL270W&quot;</span> <span class="st">&quot;YDR518W&quot;</span> <span class="st">&quot;YDR233C&quot;</span> <span class="st">&quot;YHR098C&quot;</span> <span class="st">&quot;YFR029W&quot;</span>
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">head</span>(<span class="kw">rownames</span>(exp.e))
+[<span class="dv">1</span>] <span class="st">&quot;YJR107W&quot;</span> <span class="st">&quot;YPL270W&quot;</span> <span class="st">&quot;YDR518W&quot;</span> <span class="st">&quot;YDR233C&quot;</span> <span class="st">&quot;YHR098C&quot;</span> <span class="st">&quot;YFR029W&quot;</span>
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">head</span>(<span class="kw">rownames</span>(exp.pos))
+[<span class="dv">1</span>] <span class="st">&quot;YJR107W&quot;</span> <span class="st">&quot;YPL270W&quot;</span> <span class="st">&quot;YDR518W&quot;</span> <span class="st">&quot;YDR233C&quot;</span> <span class="st">&quot;YHR098C&quot;</span> <span class="st">&quot;YFR029W&quot;</span>
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">all.equal</span>(<span class="kw">rownames</span>(exp.g), <span class="kw">rownames</span>(exp.e))
+[<span class="dv">1</span>] <span class="ot">TRUE</span>
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">all.equal</span>(<span class="kw">rownames</span>(exp.g), <span class="kw">rownames</span>(exp.pos))
+[<span class="dv">1</span>] <span class="ot">TRUE</span></code></pre></div>
+</div>
+<div id="unify-column-names" class="section level3">
+<h3><span class="header-section-number">10.1.5</span> Unify Column Names</h3>
+<p>The segregants are column names, and they are inconsistent across matrices.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">head</span>(<span class="kw">colnames</span>(exp.g))
+[<span class="dv">1</span>] <span class="st">&quot;X100g.20_4_c.glucose&quot;</span> <span class="st">&quot;X101g.21_1_d.glucose&quot;</span> <span class="st">&quot;X102g.21_2_d.glucose&quot;</span>
+[<span class="dv">4</span>] <span class="st">&quot;X103g.21_3_d.glucose&quot;</span> <span class="st">&quot;X104g.21_4_d.glucose&quot;</span> <span class="st">&quot;X105g.21_5_c.glucose&quot;</span>
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">head</span>(<span class="kw">colnames</span>(marker))
+[<span class="dv">1</span>] <span class="st">&quot;20_4_c&quot;</span> <span class="st">&quot;21_1_d&quot;</span> <span class="st">&quot;21_2_d&quot;</span> <span class="st">&quot;21_3_d&quot;</span> <span class="st">&quot;21_4_d&quot;</span> <span class="st">&quot;21_5_c&quot;</span>
+<span class="op">&gt;</span><span class="st">      </span>
+<span class="er">&gt;</span><span class="st"> </span>##fix column names with gsub
+<span class="er">&gt;</span><span class="st"> </span><span class="kw">colnames</span>(exp.g) <span class="op">%&lt;&gt;%</span><span class="st"> </span><span class="kw">strsplit</span>(<span class="dt">split=</span><span class="st">&quot;.&quot;</span>, <span class="dt">fixed=</span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">lapply</span>(<span class="cf">function</span>(x) {x[<span class="dv">2</span>]})
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">colnames</span>(exp.e) <span class="op">%&lt;&gt;%</span><span class="st"> </span><span class="kw">strsplit</span>(<span class="dt">split=</span><span class="st">&quot;.&quot;</span>, <span class="dt">fixed=</span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">lapply</span>(<span class="cf">function</span>(x) {x[<span class="dv">2</span>]})
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">head</span>(<span class="kw">colnames</span>(exp.g))
+[<span class="dv">1</span>] <span class="st">&quot;20_4_c&quot;</span> <span class="st">&quot;21_1_d&quot;</span> <span class="st">&quot;21_2_d&quot;</span> <span class="st">&quot;21_3_d&quot;</span> <span class="st">&quot;21_4_d&quot;</span> <span class="st">&quot;21_5_c&quot;</span></code></pre></div>
+</div>
+<div id="gene-positions" class="section level3">
+<h3><span class="header-section-number">10.1.6</span> Gene Positions</h3>
+<p>Let’s first pull out rownames of <code>exp.pos</code> and make them a column in the data frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>gene_pos &lt;-<span class="st"> </span>exp.pos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">gene =</span> <span class="kw">rownames</span>(exp.pos)) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span>dplyr<span class="op">::</span><span class="kw">select</span>(gene, <span class="dt">chr =</span> Chromsome, <span class="dt">start =</span> Start_coord, 
+<span class="op">+</span><span class="st">                 </span><span class="dt">end =</span> End_coord)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">print</span>(gene_pos, <span class="dt">n=</span><span class="dv">7</span>)
+<span class="co"># A tibble: 4,482 x 4</span>
+  gene      chr   start     end
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span>
+<span class="dv">1</span> YJR107W    <span class="dv">10</span>  <span class="dv">627333</span>  <span class="dv">628319</span>
+<span class="dv">2</span> YPL270W    <span class="dv">16</span>   <span class="dv">30482</span>   <span class="dv">32803</span>
+<span class="dv">3</span> YDR518W     <span class="dv">4</span> <span class="dv">1478600</span> <span class="dv">1480153</span>
+<span class="dv">4</span> YDR233C     <span class="dv">4</span>  <span class="dv">930353</span>  <span class="dv">929466</span>
+<span class="dv">5</span> YHR098C     <span class="dv">8</span>  <span class="dv">301937</span>  <span class="dv">299148</span>
+<span class="dv">6</span> YFR029W     <span class="dv">6</span>  <span class="dv">210925</span>  <span class="dv">212961</span>
+<span class="dv">7</span> YPL198W    <span class="dv">16</span>  <span class="dv">173151</span>  <span class="dv">174701</span>
+<span class="co"># … with 4,475 more rows</span></code></pre></div>
+</div>
+<div id="tidy-each-expression-matrix" class="section level3">
+<h3><span class="header-section-number">10.1.7</span> Tidy Each Expression Matrix</h3>
+<p>We <code>melt</code> the expression matrices and bind them together into one big tidy data frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>exp_g &lt;-<span class="st"> </span><span class="kw">melt</span>(exp.g) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="op">+</span><span class="st">   </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="dt">gene =</span> Var1, <span class="dt">segregant =</span> Var2, 
+<span class="op">+</span><span class="st">                 </span><span class="dt">expression =</span> value) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">condition =</span> <span class="st">&quot;glucose&quot;</span>)
+<span class="op">&gt;</span><span class="st"> </span>exp_e &lt;-<span class="st"> </span><span class="kw">melt</span>(exp.e) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="op">+</span><span class="st">   </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="dt">gene =</span> Var1, <span class="dt">segregant =</span> Var2, 
+<span class="op">+</span><span class="st">                 </span><span class="dt">expression =</span> value) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">condition =</span> <span class="st">&quot;ethanol&quot;</span>)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">print</span>(exp_e, <span class="dt">n=</span><span class="dv">4</span>)
+<span class="co"># A tibble: 488,538 x 4</span>
+  gene    segregant expression condition
+  <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>fct<span class="op">&gt;</span><span class="st">          </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">    </span>
+<span class="dv">1</span> YJR107W 20_4_c          <span class="fl">0.06</span> ethanol  
+<span class="dv">2</span> YPL270W 20_4_c         <span class="op">-</span><span class="fl">0.13</span> ethanol  
+<span class="dv">3</span> YDR518W 20_4_c         <span class="op">-</span><span class="fl">0.94</span> ethanol  
+<span class="dv">4</span> YDR233C 20_4_c          <span class="fl">0.04</span> ethanol  
+<span class="co"># … with 4.885e+05 more rows</span></code></pre></div>
+</div>
+<div id="combine-into-single-data-frame" class="section level3">
+<h3><span class="header-section-number">10.1.8</span> Combine Into Single Data Frame</h3>
+<p>Combine gene expression data from two conditions into a single data frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>exp_all &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(exp_g, exp_e)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">sample_n</span>(exp_all, <span class="dt">size=</span><span class="dv">10</span>)
+<span class="co"># A tibble: 10 x 4</span>
+   gene    segregant expression condition
+   <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>fct<span class="op">&gt;</span><span class="st">          </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">    </span>
+<span class="st"> </span><span class="dv">1</span> YAL039C 5_4_d          <span class="fl">0.290</span> glucose  
+ <span class="dv">2</span> YFL034W 13_1_a        <span class="op">-</span><span class="fl">0.08</span>  glucose  
+ <span class="dv">3</span> YHR138C 17_5_b        <span class="op">-</span><span class="fl">0.49</span>  glucose  
+ <span class="dv">4</span> YOR122C 8_3_a          <span class="fl">0.15</span>  glucose  
+ <span class="dv">5</span> YOR330C 5_1_d         <span class="op">-</span><span class="fl">0.404</span> ethanol  
+ <span class="dv">6</span> YNL246W 9_4_d          <span class="fl">0.36</span>  glucose  
+ <span class="dv">7</span> YPL146C 13_5_c        <span class="op">-</span><span class="fl">0.06</span>  glucose  
+ <span class="dv">8</span> YLR401C 9_5_d         <span class="op">-</span><span class="fl">0.61</span>  ethanol  
+ <span class="dv">9</span> YNL177C 22_3_b        <span class="op">-</span><span class="fl">0.1</span>   glucose  
+<span class="dv">10</span> YGR125W 11_2_d        <span class="op">-</span><span class="fl">0.05</span>  ethanol  </code></pre></div>
+</div>
+<div id="join-gene-positions" class="section level3">
+<h3><span class="header-section-number">10.1.9</span> Join Gene Positions</h3>
+<p>Now we want to join the gene positions with the expression data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>exp_all &lt;-<span class="st"> </span>exp_all <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">gene =</span> <span class="kw">as.character</span>(gene), 
+<span class="op">+</span><span class="st">          </span><span class="dt">segregant =</span> <span class="kw">as.character</span>(segregant))
+<span class="op">&gt;</span><span class="st"> </span>sk_tidy &lt;-<span class="st"> </span>exp_all <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">left_join</span>(gene_pos, <span class="dt">by =</span> <span class="st">&quot;gene&quot;</span>)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">sample_n</span>(sk_tidy, <span class="dt">size=</span><span class="dv">7</span>)
+<span class="co"># A tibble: 7 x 7</span>
+  gene    segregant expression condition   chr  start    end
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">          </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>int<span class="op">&gt;</span>
+<span class="dv">1</span> YGL098W 14_4_a          <span class="fl">0.26</span> ethanol       <span class="dv">7</span> <span class="dv">317345</span> <span class="dv">318082</span>
+<span class="dv">2</span> YGR058W 14_5_b         <span class="op">-</span><span class="fl">0.23</span> glucose       <span class="dv">7</span> <span class="dv">606140</span> <span class="dv">607147</span>
+<span class="dv">3</span> YOR217W 5_5_d          <span class="op">-</span><span class="fl">0.37</span> ethanol      <span class="dv">15</span> <span class="dv">749302</span> <span class="dv">751887</span>
+<span class="dv">4</span> YIL057C 9_1_d          <span class="op">-</span><span class="fl">3.99</span> glucose       <span class="dv">9</span> <span class="dv">248393</span> <span class="dv">247899</span>
+<span class="dv">5</span> YMR316W 2_6_d           <span class="fl">0.44</span> glucose      <span class="dv">13</span> <span class="dv">904823</span> <span class="dv">905833</span>
+<span class="dv">6</span> YCL035C 14_4_a          <span class="fl">0.91</span> glucose       <span class="dv">3</span>  <span class="dv">61173</span>  <span class="dv">60841</span>
+<span class="dv">7</span> YLR020C 2_3_d           <span class="fl">0.04</span> ethanol      <span class="dv">12</span> <span class="dv">183404</span> <span class="dv">181788</span></code></pre></div>
+</div>
+<div id="apply-dplyr-functions" class="section level3">
+<h3><span class="header-section-number">10.1.10</span> Apply <code>dplyr</code> Functions</h3>
+<p>Now that we have the data made tidy in the data frame <code>sk_tidy</code>, let’s apply some <code>dplyr</code> operations…</p>
+<p>Does each gene have the same number of observations?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>sk_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(gene) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="op">+</span><span class="st">   </span><span class="kw">summarize</span>(<span class="dt">value =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">summary</span>()
+     gene               value      
+ Length<span class="op">:</span><span class="dv">4478</span>        Min.   <span class="op">:</span><span class="fl">218.0</span>  
+ Class <span class="op">:</span>character   1st Qu.<span class="op">:</span><span class="fl">218.0</span>  
+ Mode  <span class="op">:</span>character   Median <span class="op">:</span><span class="fl">218.0</span>  
+                    Mean   <span class="op">:</span><span class="fl">218.6</span>  
+                    3rd Qu.<span class="op">:</span><span class="fl">218.0</span>  
+                    Max.   <span class="op">:</span><span class="fl">872.0</span>  </code></pre></div>
+<p>No, so let’s see which genes have more than one set of observations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>sk_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(gene) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="op">+</span><span class="st">   </span><span class="kw">summarize</span>(<span class="dt">value =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">filter</span>(value <span class="op">&gt;</span><span class="st"> </span><span class="kw">median</span>(value))
+<span class="co"># A tibble: 4 x 2</span>
+  gene      value
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>int<span class="op">&gt;</span>
+<span class="dv">1</span> YFR024C<span class="op">-</span>A   <span class="dv">872</span>
+<span class="dv">2</span> YJL012C     <span class="dv">872</span>
+<span class="dv">3</span> YKL198C     <span class="dv">872</span>
+<span class="dv">4</span> YPR089W     <span class="dv">872</span></code></pre></div>
+<p>Let’s remove replicated measurements for these genes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>sk_tidy <span class="op">%&lt;&gt;%</span><span class="st"> </span><span class="kw">distinct</span>(gene, segregant, condition, 
+<span class="op">+</span><span class="st">                       </span><span class="dt">.keep_all =</span> <span class="ot">TRUE</span>)
+<span class="op">&gt;</span><span class="st"> </span>
+<span class="er">&gt;</span><span class="st"> </span>sk_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(gene) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="op">+</span><span class="st">   </span><span class="kw">summarize</span>(<span class="dt">value =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">summary</span>()
+     gene               value    
+ Length<span class="op">:</span><span class="dv">4478</span>        Min.   <span class="op">:</span><span class="dv">218</span>  
+ Class <span class="op">:</span>character   1st Qu.<span class="op">:</span><span class="dv">218</span>  
+ Mode  <span class="op">:</span>character   Median <span class="op">:</span><span class="dv">218</span>  
+                    Mean   <span class="op">:</span><span class="dv">218</span>  
+                    3rd Qu.<span class="op">:</span><span class="dv">218</span>  
+                    Max.   <span class="op">:</span><span class="dv">218</span>  </code></pre></div>
+<p>As an exercise, think about how you would use <code>dplyr</code> to replace the replicated gene expression values with a single averaged expression value for these genes.</p>
+<p>Get the mean and standard deviation expression per chromosome.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>sk_tidy <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">group_by</span>(chr) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">summarize</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(expression), <span class="dt">sd=</span><span class="kw">sd</span>(expression))
+<span class="co"># A tibble: 16 x 3</span>
+     chr    mean    sd
+   <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="st"> </span><span class="dv">1</span>     <span class="dv">1</span> <span class="op">-</span><span class="fl">0.0762</span> <span class="fl">0.826</span>
+ <span class="dv">2</span>     <span class="dv">2</span> <span class="op">-</span><span class="fl">0.0447</span> <span class="fl">0.632</span>
+ <span class="dv">3</span>     <span class="dv">3</span> <span class="op">-</span><span class="fl">0.0230</span> <span class="fl">0.682</span>
+ <span class="dv">4</span>     <span class="dv">4</span> <span class="op">-</span><span class="fl">0.0233</span> <span class="fl">0.537</span>
+ <span class="dv">5</span>     <span class="dv">5</span> <span class="op">-</span><span class="fl">0.0579</span> <span class="fl">0.610</span>
+ <span class="dv">6</span>     <span class="dv">6</span> <span class="op">-</span><span class="fl">0.0772</span> <span class="fl">0.660</span>
+ <span class="dv">7</span>     <span class="dv">7</span> <span class="op">-</span><span class="fl">0.0441</span> <span class="fl">0.617</span>
+ <span class="dv">8</span>     <span class="dv">8</span> <span class="op">-</span><span class="fl">0.0474</span> <span class="fl">0.638</span>
+ <span class="dv">9</span>     <span class="dv">9</span> <span class="op">-</span><span class="fl">0.0430</span> <span class="fl">0.614</span>
+<span class="dv">10</span>    <span class="dv">10</span> <span class="op">-</span><span class="fl">0.0299</span> <span class="fl">0.570</span>
+<span class="dv">11</span>    <span class="dv">11</span> <span class="op">-</span><span class="fl">0.0396</span> <span class="fl">0.613</span>
+<span class="dv">12</span>    <span class="dv">12</span> <span class="op">-</span><span class="fl">0.0515</span> <span class="fl">0.643</span>
+<span class="dv">13</span>    <span class="dv">13</span> <span class="op">-</span><span class="fl">0.0265</span> <span class="fl">0.584</span>
+<span class="dv">14</span>    <span class="dv">14</span> <span class="op">-</span><span class="fl">0.0294</span> <span class="fl">0.642</span>
+<span class="dv">15</span>    <span class="dv">15</span> <span class="op">-</span><span class="fl">0.0130</span> <span class="fl">0.554</span>
+<span class="dv">16</span>    <span class="dv">16</span> <span class="op">-</span><span class="fl">0.0368</span> <span class="fl">0.604</span></code></pre></div>
+<p>Get the mean and standard deviation expression per chromosome in each condition.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>sk_tidy <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">group_by</span>(chr, condition) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">summarize</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(expression), <span class="dt">sd=</span><span class="kw">sd</span>(expression))
+<span class="co"># A tibble: 32 x 4</span>
+<span class="co"># Groups:   chr [16]</span>
+     chr condition      mean    sd
+   <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">         </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="st"> </span><span class="dv">1</span>     <span class="dv">1</span> ethanol    <span class="fl">0.0260</span>   <span class="fl">0.480</span>
+ <span class="dv">2</span>     <span class="dv">1</span> glucose   <span class="op">-</span><span class="fl">0.178</span>    <span class="fl">1.05</span> 
+ <span class="dv">3</span>     <span class="dv">2</span> ethanol    <span class="fl">0.0132</span>   <span class="fl">0.479</span>
+ <span class="dv">4</span>     <span class="dv">2</span> glucose   <span class="op">-</span><span class="fl">0.103</span>    <span class="fl">0.750</span>
+ <span class="dv">5</span>     <span class="dv">3</span> ethanol    <span class="fl">0.000164</span> <span class="fl">0.536</span>
+ <span class="dv">6</span>     <span class="dv">3</span> glucose   <span class="op">-</span><span class="fl">0.0461</span>   <span class="fl">0.800</span>
+ <span class="dv">7</span>     <span class="dv">4</span> ethanol    <span class="fl">0.00187</span>  <span class="fl">0.482</span>
+ <span class="dv">8</span>     <span class="dv">4</span> glucose   <span class="op">-</span><span class="fl">0.0484</span>   <span class="fl">0.586</span>
+ <span class="dv">9</span>     <span class="dv">5</span> ethanol   <span class="op">-</span><span class="fl">0.0297</span>   <span class="fl">0.479</span>
+<span class="dv">10</span>     <span class="dv">5</span> glucose   <span class="op">-</span><span class="fl">0.0862</span>   <span class="fl">0.716</span>
+<span class="co"># … with 22 more rows</span></code></pre></div>
+<p>Count the number of genes per chromosome.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>sk_tidy <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">filter</span>(condition <span class="op">==</span><span class="st"> &quot;glucose&quot;</span>, segregant <span class="op">==</span><span class="st"> &quot;20_4_c&quot;</span>) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">group_by</span>(chr) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="op">+</span><span class="st">   </span><span class="kw">summarize</span>(<span class="dt">num.genes =</span> <span class="kw">n</span>())
+<span class="co"># A tibble: 16 x 2</span>
+     chr num.genes
+   <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>int<span class="op">&gt;</span>
+<span class="st"> </span><span class="dv">1</span>     <span class="dv">1</span>        <span class="dv">60</span>
+ <span class="dv">2</span>     <span class="dv">2</span>       <span class="dv">298</span>
+ <span class="dv">3</span>     <span class="dv">3</span>       <span class="dv">125</span>
+ <span class="dv">4</span>     <span class="dv">4</span>       <span class="dv">629</span>
+ <span class="dv">5</span>     <span class="dv">5</span>       <span class="dv">207</span>
+ <span class="dv">6</span>     <span class="dv">6</span>        <span class="dv">79</span>
+ <span class="dv">7</span>     <span class="dv">7</span>       <span class="dv">395</span>
+ <span class="dv">8</span>     <span class="dv">8</span>       <span class="dv">209</span>
+ <span class="dv">9</span>     <span class="dv">9</span>       <span class="dv">152</span>
+<span class="dv">10</span>    <span class="dv">10</span>       <span class="dv">256</span>
+<span class="dv">11</span>    <span class="dv">11</span>       <span class="dv">241</span>
+<span class="dv">12</span>    <span class="dv">12</span>       <span class="dv">387</span>
+<span class="dv">13</span>    <span class="dv">13</span>       <span class="dv">367</span>
+<span class="dv">14</span>    <span class="dv">14</span>       <span class="dv">319</span>
+<span class="dv">15</span>    <span class="dv">15</span>       <span class="dv">388</span>
+<span class="dv">16</span>    <span class="dv">16</span>       <span class="dv">366</span></code></pre></div>
+<p>Filter for the first gene on every chromosome.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>sk_tidy <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">filter</span>(condition <span class="op">==</span><span class="st"> &quot;glucose&quot;</span>, segregant <span class="op">==</span><span class="st"> &quot;20_4_c&quot;</span>) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">group_by</span>(chr) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">filter</span>(start <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(start))
+<span class="co"># A tibble: 16 x 7</span>
+<span class="co"># Groups:   chr [16]</span>
+   gene    segregant expression condition   chr start   end
+   <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">          </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>int<span class="op">&gt;</span>
+<span class="st"> </span><span class="dv">1</span> YHL040C 20_4_c        <span class="op">-</span><span class="fl">2.79</span>  glucose       <span class="dv">8</span> <span class="dv">20968</span> <span class="dv">19085</span>
+ <span class="dv">2</span> YNL334C 20_4_c        <span class="op">-</span><span class="fl">0.9</span>   glucose      <span class="dv">14</span> <span class="dv">12876</span> <span class="dv">12208</span>
+ <span class="dv">3</span> YOL157C 20_4_c        <span class="op">-</span><span class="fl">1.06</span>  glucose      <span class="dv">15</span> <span class="dv">24293</span> <span class="dv">22524</span>
+ <span class="dv">4</span> YKL222C 20_4_c         <span class="fl">0.09</span>  glucose      <span class="dv">11</span>  <span class="dv">5621</span>  <span class="dv">3504</span>
+ <span class="dv">5</span> YIL168W 20_4_c        <span class="op">-</span><span class="fl">1.14</span>  glucose       <span class="dv">9</span> <span class="dv">29032</span> <span class="dv">29415</span>
+ <span class="dv">6</span> YJL213W 20_4_c         <span class="fl">0.84</span>  glucose      <span class="dv">10</span> <span class="dv">32163</span> <span class="dv">33158</span>
+ <span class="dv">7</span> YPL272C 20_4_c        <span class="op">-</span><span class="fl">0.18</span>  glucose      <span class="dv">16</span> <span class="dv">28164</span> <span class="dv">26611</span>
+ <span class="dv">8</span> YLL063C 20_4_c        <span class="op">-</span><span class="fl">0.66</span>  glucose      <span class="dv">12</span> <span class="dv">16072</span> <span class="dv">14648</span>
+ <span class="dv">9</span> YFL048C 20_4_c        <span class="op">-</span><span class="fl">0.09</span>  glucose       <span class="dv">6</span> <span class="dv">40180</span> <span class="dv">38843</span>
+<span class="dv">10</span> YML132W 20_4_c        <span class="op">-</span><span class="fl">0.21</span>  glucose      <span class="dv">13</span>  <span class="dv">7244</span>  <span class="dv">8383</span>
+<span class="dv">11</span> YGL261C 20_4_c        <span class="op">-</span><span class="fl">0.14</span>  glucose       <span class="dv">7</span>  <span class="dv">6652</span>  <span class="dv">6290</span>
+<span class="dv">12</span> YBL107C 20_4_c         <span class="fl">0.290</span> glucose       <span class="dv">2</span> <span class="dv">10551</span>  <span class="dv">9961</span>
+<span class="dv">13</span> YDL248W 20_4_c        <span class="op">-</span><span class="fl">0.68</span>  glucose       <span class="dv">4</span>  <span class="dv">1802</span>  <span class="dv">2953</span>
+<span class="dv">14</span> YEL073C 20_4_c        <span class="op">-</span><span class="fl">0.02</span>  glucose       <span class="dv">5</span>  <span class="dv">7553</span>  <span class="dv">7230</span>
+<span class="dv">15</span> YAL062W 20_4_c        <span class="op">-</span><span class="fl">5.64</span>  glucose       <span class="dv">1</span> <span class="dv">31568</span> <span class="dv">32941</span>
+<span class="dv">16</span> YCL068C 20_4_c         <span class="fl">0.47</span>  glucose       <span class="dv">3</span> <span class="dv">12285</span> <span class="dv">11503</span></code></pre></div>
+<p>To plot expression in glucose versus ethanol we first need to use <code>dcast()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>sk_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dcast</span>(gene <span class="op">+</span><span class="st"> </span>segregant <span class="op">~</span><span class="st"> </span>condition, 
+<span class="op">+</span><span class="st">                   </span><span class="dt">value.var =</span> <span class="st">&quot;expression&quot;</span>) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">as_tibble</span>()
+<span class="co"># A tibble: 488,102 x 4</span>
+   gene    segregant ethanol glucose
+   <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">       </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="st"> </span><span class="dv">1</span> YAL002W 1_1_d        <span class="fl">0.37</span>   <span class="op">-</span><span class="fl">0.01</span>
+ <span class="dv">2</span> YAL002W 1_3_d        <span class="fl">0.23</span>    <span class="fl">0.03</span>
+ <span class="dv">3</span> YAL002W 1_4_d        <span class="fl">0.08</span>    <span class="fl">0.07</span>
+ <span class="dv">4</span> YAL002W 1_5_c       <span class="op">-</span><span class="fl">0.12</span>    <span class="fl">0.13</span>
+ <span class="dv">5</span> YAL002W 10_1_c       <span class="fl">0.12</span>   <span class="op">-</span><span class="fl">0.1</span> 
+ <span class="dv">6</span> YAL002W 10_2_d       <span class="fl">0.1</span>    <span class="op">-</span><span class="fl">0.2</span> 
+ <span class="dv">7</span> YAL002W 10_3_c       <span class="fl">0.07</span>   <span class="op">-</span><span class="fl">0.15</span>
+ <span class="dv">8</span> YAL002W 10_4_d       <span class="fl">0.06</span>   <span class="op">-</span><span class="fl">0.04</span>
+ <span class="dv">9</span> YAL002W 11_1_a       <span class="fl">0.07</span>   <span class="op">-</span><span class="fl">0.07</span>
+<span class="dv">10</span> YAL002W 11_2_d       <span class="fl">0.3</span>     <span class="fl">0.1</span> 
+<span class="co"># … with 488,092 more rows</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>sk_tidy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dcast</span>(gene <span class="op">+</span><span class="st"> </span>segregant <span class="op">~</span><span class="st"> </span>condition, 
+<span class="op">+</span><span class="st">                   </span><span class="dt">value.var =</span> <span class="st">&quot;expression&quot;</span>) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">filter</span>(gene <span class="op">==</span><span class="st"> &quot;YAL002W&quot;</span>) <span class="op">%&gt;%</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> glucose, <span class="dt">y =</span> ethanol)) <span class="op">+</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="op">+</span><span class="st">   </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
+<p><img src="data_wrangling_files/figure-html/unnamed-chunk-74-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="relational-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="further-reading.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jdstorey/yarp/edit/master/data_wrangling.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
